@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int min(int a,int b,int c,int d,int e){
+	int k=(a<b)?a:b;
+	int m=(c<d)?c:d;
+	int l=(k<m)?k:m;
+	return (l<e)?l:e;
+}
+
+int count(vector<int> a,vector<int> b,vector<int> c,vector<int> d,vector<int> e){
+	int m,i=0,count=0;
+	
+	vector<int> siz;
+	siz.push_back(a.size());
+	siz.push_back(b.size());
+	siz.push_back(c.size());
+	siz.push_back(d.size());
+	siz.push_back(e.size());
+	sort(siz.begin(),siz.end());
+	while(siz[2]!=0){
+	
+		int temp=0;
+		//check number of presses between m to m+1
+		//if more than 3 increment count
+		//else increse the counter of min element
+		if(a[i]>=m && a[i]<=m+1) temp++;
+		if(b[i]>=m && b[i]<=m+1) temp++;
+		if(c[i]>=m && c[i]<=m+1) temp++;
+		if(d[i]>=m && d[i]<=m+1) temp++;
+		if(e[i]>=m && e[i]<=m+1) temp++;
+		if(temp>=3) {
+			count++;
+			i++;
+			m=min(a[i],b[i],c[i],d[i],e[i]);
+		}
+		else{
+			m=min(a[i],b[i],c[i],d[i],e[i]);
+		}
+		siz[2]--;
+	}
+
+
+return count;
+
+}
+
+int main() {
+	    	
+
+vector<int> a={1,2,3,4,5,6};
+
+vector<int> b={1,2,3,4,5,6,7};
+
+vector<int> c={1,2,3,4,5,6};
+
+vector<int> d={0,1,2};
+
+vector<int> e={1,2,3,4,5,6,7,8};
+cout<<count(a,b,c,d,e);
+	return 0;
+}
