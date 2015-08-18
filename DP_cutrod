@@ -1,0 +1,29 @@
+#include <iostream>
+#include <climits>
+using namespace std;
+
+
+int max(int a,int b){
+	return ((a<b)?b:a);
+}
+
+int maxcutrod(int prices[],int n){
+	int val[n+1];
+	val[0]=0;
+	int i,j;
+	for(i=1;i<=n;i++){
+		int res=INT_MIN;
+		for(j=0;j<i;j++){
+			res=max(res,val[i-j-1]+prices[j]);
+		}
+		val[i]=res;
+	}
+	return val[n];
+}
+
+int main() {
+	int arr[] = {1, 5, 8, 9, 10, 17, 17, 20};
+	int n=8;
+	cout<<maxcutrod(arr,n);
+	return 0;
+}
